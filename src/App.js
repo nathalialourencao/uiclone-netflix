@@ -1,31 +1,53 @@
-/* eslint-disable import/no-anonymous-default-export */
-
 import React, { useEffect, useState } from "react";
+import { GlobalStyles } from './styles/GlobalStyles';
+import { Page, Lists } from './styles/styles'
 import Tmdb from "./Tmdb";
+import MovieRow from "./components/MovieRow";
+import FeaturedMovie from "./components/FeaturedMovie";
 
-export default () => {
+function App() {
 
   const [movieList, setMovieList] = useState([]);
+  const [featuredData, setFeaturedData] = useState(null);
 
   useEffect(() => {
-    const loadAll = async () => { 
+    const loadAll = async () => {
+      // Pegando a lista
       let list = await Tmdb.getHomeList();
-      setMovieList(list)
+      setMovieList(list);
+
+      // Pegando o featured
+      let originals = list.filter(i=>i.slug === 'originals');
+      let randomChosen = Math.floor(Math.random() * (originals[0].items.results.length -1));
+      let chosen = originals[0].items.results[randomChosen];
+      let chosenInfo = await Tmdb.getMovieInfo(chosen.id, 'tv');
+      setFeaturedData(chosenInfo);
+
+      console.log(chosenInfo)
     }
 
     loadAll();
   }, []);
 
 
-  return(
-    <div className="page"> 
-      <section className="lists">
-        {movieList.map((item, key)=>(
-          <div key={key}>
-            {item.title}
-          </div>
-        ))}
-      </section>
-    </div>
-  )
+  return (
+    <>
+      <Page>
+
+        {featuredData &&
+          <FeaturedMovie item={featuredData} />
+        }
+
+        <Lists>
+          {movieList.map((item, key) => (
+            <MovieRow key={key} title={item.title} items={item.items} />
+          ))}
+        </Lists>
+      </Page>
+
+      <GlobalStyles />
+    </>
+  );
 }
+
+export default App;

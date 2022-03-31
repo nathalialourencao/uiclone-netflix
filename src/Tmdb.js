@@ -1,15 +1,16 @@
 /* eslint-disable import/no-anonymous-default-export */
-const API_KEY = '8124a56e205542f40e645f8137d419a9'
-const API_BASE = 'https://api.themoviedb.org/3'
 
-const basicFetch = async(endpoint) =>{
+const API_KEY= process.env.REACT_APP_API_KEY
+const API_BASE = process.env.REACT_APP_API_BASE
+
+const basicFetch = async (endpoint) => {
     const req = await fetch(`${API_BASE}${endpoint}`);
     const json = await req.json();
     return json;
 }
 
-export default{
-    getHomeList: async () =>{
+export default {
+    getHomeList: async () => {
         return [
             {
                 slug: 'originals',
@@ -52,6 +53,25 @@ export default{
                 items: await basicFetch(`/discover/movie?with_network=99&language=pt-BR&api_key=${API_KEY}`)
             },
         ];
+    },
+    getMovieInfo: async(movieId, type) => {
+        let info = {};
+
+        if(movieId){
+            switch(type){
+                case 'movie':
+                    info = await basicFetch(`/movie/${movieId}?language=pt-BR&api_key=${API_KEY}`);
+                break;
+                case 'tv':
+                    info = await basicFetch(`/movie/${movieId}?language=pt-BR&api_key=${API_KEY}`);
+                break;
+                default:
+                    info = null
+                break;
+            }
+        }
+
+        return info;
     }
 }
 
