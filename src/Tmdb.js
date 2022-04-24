@@ -75,7 +75,7 @@ export default {
 
     getMovieInfo: async(movieId, type) => ({
         'movie': await basicFetch(`/movie/${movieId}?language=pt-BR&api_key=${API_KEY}`),
-        'tv': await basicFetch(`/tv/${movieId}?language=pt-BR&api_key=${API_KEY}`),
+        'tv': await basicFetch(`/tv/${movieId}?language=pt-BR&api_key=${API_KEY}`)
     }[type] || 'Nenhum filme encontrado')
 
 }

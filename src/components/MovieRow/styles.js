@@ -6,6 +6,11 @@ export const MovieRow = styled.div`
 
 export const Title = styled.h1`
     margin: 0 0 0 30px;
+
+    @media(max-width: 760px){
+        font-size: 25px;
+        margin: 0 0 0 20px;
+    }
 `
 
 export const MovieListWrapper = styled.div`
@@ -55,6 +60,10 @@ export const MovieRowArrow = styled.div`
     }
 
     ${MovieRow}:hover &{
+        opacity: 1;
+    }
+
+    @media(max-width: 760px){
         opacity: 1;
     }
 `

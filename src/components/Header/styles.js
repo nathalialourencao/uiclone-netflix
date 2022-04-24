@@ -14,6 +14,10 @@ export const Header = styled.header`
     background: transparent;
     transition: all 400ms;
 
+    @media(max-width: 760px){
+        padding: 5px 20px;
+    }
+
     &.is-black{
         background-color: #141414;
     }

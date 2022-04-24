@@ -26,6 +26,10 @@ export const MovieStarContent = styled.div`
     justify-content: center;
     padding-left: 60px;
     padding-bottom: 200px;
+
+    @media(max-width: 760px){
+        padding-left: 20px;
+    }
 `
 
 export const MovieStarInfos = styled.div`
@@ -41,6 +45,10 @@ export const MovieStarInfos = styled.div`
             color: #46d369;
         }
     }
+
+    @media(max-width: 760px){
+        font-size: 16px;
+    }
 `
 
 export const MovieStarDescription = styled.div`
@@ -49,6 +57,12 @@ export const MovieStarDescription = styled.div`
     color: #999;
     line-height: 30px;
     max-width: 45%;
+
+    @media(max-width: 760px){
+        max-width: 90%;
+        font-size: 14px;
+        line-height: 23px;
+    }
 `
 
 export const MovieStarButtons = styled.div`
@@ -86,4 +100,8 @@ export const MovieStarGenres = styled.div`
     margin-top: 20px;
     font-size: 18px;
     color: #999;
+
+    @media(max-width: 760px){
+        font-size: 16px;
+    }
 `

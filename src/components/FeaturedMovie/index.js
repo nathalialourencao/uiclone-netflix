@@ -4,12 +4,19 @@ import { MovieStar, Title, Overlay, MovieStarContent, MovieStarInfos, MovieStarD
 
 
 export default ({ item }) => {
-
+    // Ano
     let firstDate = new Date(item.first_air_date);
 
+    // Gereno
     let genres = [];
     for (let i in item.genres) {
         genres.push(item.genres[i].name);
+    }
+
+    // Descrição
+    let description = item.overview;
+    if(description.length > 200){
+        description = description.substring(0, 200) + '...'
     }
 
     return (
@@ -27,7 +34,7 @@ export default ({ item }) => {
                         </p>
                     </MovieStarInfos>
                     <MovieStarDescription>
-                        {item.overview}
+                        {item.description}
                     </MovieStarDescription>
                     <MovieStarButtons>
                         <Button className="_primary" href={`/watch/${item.id}`}>► Assistir</Button>

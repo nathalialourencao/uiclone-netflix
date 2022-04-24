@@ -15,5 +15,9 @@ export const Loading = styled.div`
 
     img{
         width: 20%;
+
+        @media(max-width: 760px){
+            width: 80%;
+        }
     }
 ` 
