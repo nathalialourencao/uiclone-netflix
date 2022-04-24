@@ -4,11 +4,14 @@ import { Page, Lists } from './styles/styles'
 import Tmdb from "./Tmdb";
 import MovieRow from "./components/MovieRow";
 import FeaturedMovie from "./components/FeaturedMovie";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
 
   const [movieList, setMovieList] = useState([]);
   const [featuredData, setFeaturedData] = useState(null);
+  const [blackHeader, setBlackHeader] = useState(false);
 
   useEffect(() => {
     const loadAll = async () => {
@@ -22,15 +25,35 @@ function App() {
       let chosen = originals[0].items.results[randomChosen];
       let chosenInfo = await Tmdb.getMovieInfo(chosen.id, 'tv');
       setFeaturedData(chosenInfo);
+
+      console.log(chosenInfo)
     }
 
     loadAll();
+  }, []);
+
+  useEffect(() => {
+    const scrollListener = () => {
+        if(window.scrollY > 10){
+          setBlackHeader(true);
+        }
+        else{
+          setBlackHeader(false);
+        }
+    }
+    window.addEventListener('scroll', scrollListener);
+
+    return () =>{
+      window.removeEventListener('scroll', scrollListener);
+    }
   }, []);
 
 
   return (
     <>
       <Page>
+
+        <Header scroll={blackHeader}/>
 
         {featuredData &&
           <FeaturedMovie item={featuredData} />
@@ -44,6 +67,8 @@ function App() {
       </Page>
 
       <GlobalStyles />
+
+      <Footer />
     </>
   );
 }
