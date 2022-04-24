@@ -6,6 +6,7 @@ import MovieRow from "./components/MovieRow";
 import FeaturedMovie from "./components/FeaturedMovie";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Loading from "./components/Loading";
 
 function App() {
 
@@ -20,13 +21,11 @@ function App() {
       setMovieList(list);
 
       // Pegando o featured
-      let originals = list.filter(i=>i.slug === 'originals');
-      let randomChosen = Math.floor(Math.random() * (originals[0].items.results.length -1));
+      let originals = list.filter(i => i.slug === 'originals');
+      let randomChosen = Math.floor(Math.random() * (originals[0].items.results.length - 1));
       let chosen = originals[0].items.results[randomChosen];
       let chosenInfo = await Tmdb.getMovieInfo(chosen.id, 'tv');
       setFeaturedData(chosenInfo);
-
-      console.log(chosenInfo)
     }
 
     loadAll();
@@ -34,16 +33,16 @@ function App() {
 
   useEffect(() => {
     const scrollListener = () => {
-        if(window.scrollY > 10){
-          setBlackHeader(true);
-        }
-        else{
-          setBlackHeader(false);
-        }
+      if (window.scrollY > 10) {
+        setBlackHeader(true);
+      }
+      else {
+        setBlackHeader(false);
+      }
     }
     window.addEventListener('scroll', scrollListener);
 
-    return () =>{
+    return () => {
       window.removeEventListener('scroll', scrollListener);
     }
   }, []);
@@ -53,7 +52,7 @@ function App() {
     <>
       <Page>
 
-        <Header scroll={blackHeader}/>
+        <Header scroll={blackHeader} />
 
         {featuredData &&
           <FeaturedMovie item={featuredData} />
@@ -69,6 +68,10 @@ function App() {
       <GlobalStyles />
 
       <Footer />
+
+      {movieList.length <= 0 &&
+        <Loading />
+      }
     </>
   );
 }

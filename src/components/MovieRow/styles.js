@@ -14,7 +14,7 @@ export const MovieListWrapper = styled.div`
 `
 
 export const MovieList = styled.div`
-     width: 99999px;
+     transition: all ease 0.5s;
 `
 
 export const MovieListItem = styled.div`
@@ -30,5 +30,31 @@ export const MovieListItem = styled.div`
         &:hover{
             transform: scale(1);
         }
+    }
+`
+export const MovieRowArrow = styled.div`
+    position: absolute;
+    width: 40px;
+    height: 225px;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 400ms;
+
+    &._is-left{
+        left: 0;
+    }
+
+    &._is-right{
+        right: 0;
+    }
+
+    ${MovieRow}:hover &{
+        opacity: 1;
     }
 `
