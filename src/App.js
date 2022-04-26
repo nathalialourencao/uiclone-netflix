@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GlobalStyles } from './styles/GlobalStyles';
-import { Page, Lists } from './styles/styles'
+import { Page, Lists } from './styles/App'
 import Tmdb from "./Tmdb";
 import MovieRow from "./components/MovieRow";
 import FeaturedMovie from "./components/FeaturedMovie";

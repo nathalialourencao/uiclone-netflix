@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import * as palette from '../../styles/Variables';
 
 export const MovieStar = styled.section`
     height: 100vh;
@@ -42,7 +43,7 @@ export const MovieStarInfos = styled.div`
         margin-right: 15px;
 
         &.points{
-            color: #46d369;
+            color: ${palette.colorGreen};
         }
     }
 
